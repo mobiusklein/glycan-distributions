@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block contents %}
+    <div>
+        <h1 class="my-margin">Results</h1>
+    </div>
+
+    <div>
+        <h3 class="my-margin">CS and nKLD</h3>
+        <table class="my-margin">
+            <tr>
+                {% for column in value_table_header[:-1] %}
+                <th>{{column}}</th>
+                {% endfor %}
+                <th class="absorbing column">{{value_table_header[-1]}}</th>
+            </tr>
+            {% for row in value_table_rows %}
+            <tr>
+                {% for cell in row %}
+                <td>{{cell}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        <h3>Expected Glycan Distributions</h3>
+        {% for figure in plot_expected %}
+            <br>{{figure|safe}}<br>
+        {% endfor %}
+    </div>
+
+    <div>
+        <h3>Experimental Glycan Distributions</h3>
+        {% for figure in plot_experimental %}
+            <br>{{figure|safe}}<br>
+        {% endfor %}
+    </div>
+
+    <div>
+        <h3>Comparison Glycan Distributions</h3>
+        {% for figure in plot_comparisons %}
+            <br>{{figure|safe}}<br>
+        {% endfor %}
+    </div>
+
+{% endblock %}

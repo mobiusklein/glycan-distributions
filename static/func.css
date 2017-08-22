@@ -1,0 +1,94 @@
+.my-margin {
+    margin-left:8px;
+}
+
+.my-sidebar {
+    height:100%;
+    padding:8px 16px;
+    width:200px;
+    position:fixed!important;
+    z-index:1;
+    overflow:auto;
+    background-color:silver!important;
+}
+
+.my-sidebar-item {
+    padding:8px;
+    display:block;
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+}
+.my-sidebar-item:hover {
+    background-color:#ccc!important
+}
+
+.my-contents {
+    margin-left:300px;
+    margin-right:100px;
+}
+
+.my-thirds {
+    float:left;
+    width:33.3333%;
+}
+
+.my-fourths {
+    float:left;
+    width:25%;
+}
+
+.my-fraction-padding {
+    padding:0 8px;
+    
+}
+
+input[type=text] {
+    padding: 8px;
+    display: block;
+    border: 1px solid black!important;
+    width: 200px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    padding:5px 15px; 
+    background:silver; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    margin-left: 8px;
+}
+
+table, th, td {
+    border: 2px solid black;
+    padding:10px;
+}
+
+table {
+    width:100%;
+    border-collapse: collapse;
+    table-layout:auto;
+}
+
+
+table .absorbing-column {
+    width: 100%;
+}
+
+th {
+    background-color: darkslategrey;
+    color:white;
+}
+
+tr {
+    text-align:center;
+}
+
+tr:nth-child(even) {
+    background-color: lightgrey;
+}
+

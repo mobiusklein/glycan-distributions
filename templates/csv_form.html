@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block contents %}
+
+    <h1 class="my-margin">Submission Form</h1>
+    <form method="post" accept-charset="utf-8" enctype="multipart/form-data" action="/csv-form">
+        <h3 class="my-margin">Expected inputs</h3>
+        <div>
+            <div class="my-fourths">
+                <label class="my-margin">Name</label>
+                <input class="my-margin" type="text" placeholder="Dataset name" name="expect-name" required>
+            </div>
+            <div class="my-fourths">
+                <label class="my-margin">Accession ID</label> 
+                <input class="my-margin" type="text" placeholder="UniProt accession ID" name="expect-accid">
+            </div>
+            <div class="my-fourths">
+                <label class=my-margin">Sequence FASTA</label>
+                <input class="my-margin" type="file" name="expect-fasta"><br><br>
+            </div>
+            <div class="my-fourths">
+                <label class="my-margin">CSVs</label>
+                <br><input class="my-margin" type="file" name="expect-csvs" multiple/ required><br><br>
+            </div>
+        </div><br><br>
+
+        <h3 class="my-margin">Experimental inputs</h3>
+        <div>
+            <div class="my-fourths">
+                <label class="my-margin">Name</label>
+                <input class="my-margin" type="text" placeholder="Dataset name" name="exper-name" required>
+            </div>
+            <div class="my-fourths">
+                <label class="my-margin">Accession ID</label>
+                <input class="my-margin" type="text" placeholder="UniProt accession ID" name="exper-accid">
+            </div>
+            <div class="my-fourths">
+                <label class="my-margin">Sequence FASTA</label>
+                <input class="my-margin" type="file" name="exper-fasta"><br><br>
+            </div>
+            <div class="my-fourths">
+                <label class="my-margin">CSVs</label>
+                <br><input class="my-margin" type="file" name="exper-csvs" multiple/ required><br><br>
+            </div>
+        </div>
+
+        <h3 class="my-margin">Constants (Optional)</h3>
+        <div>
+            <div class="my-thirds">
+                <label class="my-margin">Replicate cutoff</label>
+                <input class="my-margin" type="text" placeholder="1" name="rcutoff">
+            </div>
+            <div class="my-thirds">
+                <label class="my-margin">MS2 score cutoff</label>
+                <input class="my-margin" type="text" placeholder="30" name="scutoff">
+            </div>
+            <div class="my-thirds">
+                <label class="my-margin">Sequon length</label>
+                <input class="my-margin" type="text" placeholder="4" name="sequonlen">
+            </div>
+        </div>
+
+        <br><input class="my-margin" type="submit"/><br>
+    </form>
+
+{% endblock %}

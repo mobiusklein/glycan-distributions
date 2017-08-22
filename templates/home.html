@@ -1,0 +1,44 @@
+{% extends "layout.html"  %}
+
+{% block contents %}
+
+    <div class="my-margin">
+        <h1>Welcome!</h1>
+        <p>Here, you can quantify and visualize the differences in site-specific glycosylation between glycoproteins. Click the "submit form" link in the sidebar to get started! If you'd like some more information on what we're doing, keep reading.</p>
+    </div>
+
+    <div class="my-margin">
+        <h2>Setting up</h2>
+        <p>We quantify differences in site-specific glycosylation using probability distribution distance metrics. The program requires three inputs for two glycoproteins</p>
+        <ul>
+            <li><a href='http://www.bumc.bu.edu/msr/glycresoft/'>GlycReSoft</a> glycopeptide CSV files</li>
+            <li><a href='http://www.uniprot.org/'>UniProt</a> accession ID</li>
+            <li>Dataset name</li>
+        </ul>
+        <p>We label one dataset as "expected" and the other as "experimental"; however, the reason for the labeling is defined by the user. Some examples include</p>
+        <ul>
+            <li>A protein (expected) and its mutant (experimental)</li>
+            <li>A control sample (expected) and a treatment sample (experimental)</li>
+        </ul>
+    </div>
+
+    <div class="my-margin">
+        <h2>Comparing glycan populations</h2>
+        <p>The glycopeptides for each dataset are quality filtered and a glycan population is defined for each protein’s glycosylation sites. Those populations are then normalized to produce probability distributions representing the likelihood of a glycan appearing at a particular glycosylation site. We match sequons to align glycosylation sites between proteins and compare glycan probability distributions using cosine similarity (CS) and normalized Kullback-Leibler divergence (nKLD).</p>
+        <h3>Cosine similarity</h3>
+        <p><a href='https://en.wikipedia.org/wiki/Cosine_similarity'>CS</a> is simply the cosine of the angle between two n-dimensional vectors. It ranges from zero to one, with a higher value meaning the vectors are more similar. For glycan probability distributions, a CS of zero means the paired distributions have no glycans in common; a CS of one means the distributions are identical.</p>
+        <h3>Normalized Kullback-Leibler divergence</h3>
+        <p><a href='https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence'>nKLD</a> quantifies how well the expected distribution predicts the behavior of the experimental distribution. It also ranges from zero to one, but unlike CS a low value means the distributions are similar. For glycan probability distributions, a nKLD of zero means the distributions are identical; a nKLD of one means the expected distribution does not relate to the experimental distribution.</p>
+    </div>
+
+    <div class="my-margin">
+        <h2>Resources</h2>
+        <ul>
+            <li><a href='http://www.bumc.bu.edu/msr/glycresoft/'>GlycReSoft</a> and how it works</li>
+            <li><a href='http://www.uniprot.org/'>UniProt</a> protein sequence database</li>
+            <li><a href='https://github.com/jturcino/glycresoft-qsub-templates'>Generating glycopeptide CSVs</a> for the SCC</li>
+            <li>Source code for this project</li>
+        </ul>
+    </div>
+
+{% endblock %}
