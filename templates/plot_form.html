@@ -22,6 +22,11 @@
             </tr>
             {% endfor %}
         </table>
+        <form method="post" accept-charset="utf-8" enctype="multipart/form-data" action="/csv-file">
+            <br>
+            <input type="hidden" name="csvstr" value="{{csvstr}}">
+            <input type="submit" value="Get CSV"/>
+        </form>
     </div>
 
     <div>
