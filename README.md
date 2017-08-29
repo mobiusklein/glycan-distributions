@@ -1,6 +1,6 @@
 # glycan distributions
 
-A Python library, webapp, and command-line script for quantifying differences in site-specific protein glycosylation
+A Python library, webapp, and command-line script for quantifying differences in site-specific protein glycosylation. Thanks to [Joshua Klein](https://github.com/mobiusklein/) for helping me with this!
 
 ## Getting Started
 To use this repo, clone it into a directory of your choosing and install the matplotlib, numpy, flask, and glycopeptidepy Python libraries.
