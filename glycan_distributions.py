@@ -190,6 +190,44 @@ def get_sequoninfodict_from_files_accid(csvfilelist, accessionid=None, seq='', s
     sequoninfodict = { seq[x:x+sequon_length]: {'site': x, 'glycans':y} for x,y in site_to_glycans.items() }
     return sequoninfodict
 
+def write_distribution_csvs(sequoninfodict, outdir):
+    """Writes CSV files for the glycan distribution of each site with coverage to the 
+    provided output directory. No return value."""
+
+    for sequon, sdict in sequoninfodict.items():
+        site = sdict['site']
+        glycans = sdict['glycans']
+        if len(glycans) == 0:
+            continue
+        gcomp_to_signal = { x.glycan:x.total_signal for x in glycans}
+
+        # turn glycans into ordered dicts and order
+        gdict_signal = []
+        for gcomp, signal in gcomp_to_signal.items():
+            gdict = str_to_dict(gcomp.replace(';', ','))
+            gdict = OrderedDict(sorted(gdict.items(), 
+                        key=lambda x: tuple(x[0]==y for y in monosaccharide_order), reverse=True))
+            gdict_signal.append((gdict, signal))
+
+        # order glycans by complexity; then order scores
+        ordered_glycans_scores = sorted(gdict_signal, key=lambda x: tuple(x[0][y] for y in glycan_order if y in x[0]))
+        ordered_scores = [ x[1] for x in ordered_glycans_scores ]
+
+        # get normalized scores
+        ordered_glycan_strings = [ get_glycan_string(x[0]) for x in ordered_glycans_scores ]
+        norm_ordered_scores = [ x/sum(ordered_scores) for x in ordered_scores ]
+
+        # get csv
+        fname = '{}/{}_{}_glycan_distibution.csv'.format(outdir, sequon, site)
+        header = ['Glycan composition', 'Probability']
+        with open(fname, 'w') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(header)
+            for glycan, score in zip(ordered_glycan_strings, norm_ordered_scores):
+                row = [glycan, round(score, 3)]
+                writer.writerow(row)
+    return
+
 def get_distribution_axes(sequoninfodict):
     """Builds glycan distribution plots for sequons with coverage. Returns a dictionary of the form
     {("SEQUON", SITE): AXIS, ...}"""
@@ -249,7 +287,7 @@ def get_seq(accession_id, return_id=False):
 def parse_fasta_text(fasta_text):
     """Returns sequence and ID from text of single fasta entry. ID is the 
     first word after > character in header"""
-    assert fasta_text.count('>') == 1, 'Only one sequence allowed'
+    assert fasta_text.count('>') == 1, 'Only one sequence allowed; '+str(fasta_text.count('>'))+' found'
     id = fasta_text.split('\n')[0].split(' ')[0].replace('>', '')
     seq = ''.join(fasta_text.split('\n')[1:])
     return id, seq
